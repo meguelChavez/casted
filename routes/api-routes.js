@@ -9,9 +9,9 @@ const Schema = mongoose.Schema;
 
 module.exports = (app) => {
 
-    app.get('/', function (req, res) {
-        res.sendFile(path.join(__dirname, '../public/index.html'));
-    });
+    // app.get('/', function (req, res) {
+    //     res.sendFile(path.join(__dirname, '../public/index.html'));
+    // });
 
     const databaseUrl = process.env.MONGODB_URI_Dev;
     const collections = [process.env.Collection];
@@ -51,7 +51,4 @@ module.exports = (app) => {
         })
 
     })
-
-
-
 }
