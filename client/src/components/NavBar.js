@@ -24,15 +24,15 @@ class NavBar extends Component {
     render() {
         return (
             <div>
-                <Navbar dark expand="sm" className="mb-5">
+                <Navbar expand="sm" className="mb-5">
                     <Container>
                         <NavbarBrand href="/">Find A Movie</NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
-                                <NavItem>
+                                {/* <NavItem>
                                     <NavLink href="https://google.com" target="_blank">Google</NavLink>
-                                </NavItem>
+                                </NavItem> */}
                             </Nav>
                         </Collapse>
                     </Container>

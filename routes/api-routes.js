@@ -1,6 +1,8 @@
 // const db = require('../models');
 const mongoose = require('mongoose')
 const mongojs = require("mongojs");
+const OMDB = require('../Utils/OmdbAPI')
+
 
 const Schema = mongoose.Schema;
 
@@ -23,10 +25,11 @@ module.exports = (app) => {
     });
 
     app.get('/api/titles', (req, res) => {
-        console.log('titles route')
+        // console.log('titles route')
         const { searchBy, searchInput } = req.query
-        console.log(searchBy)
-        console.log(searchInput)
+        // console.log(searchBy)
+        // console.log(searchInput)
+
         db.Titles.find({ [searchBy]: searchInput }, (err, data) => {
             const response = { data }
             if (err) {

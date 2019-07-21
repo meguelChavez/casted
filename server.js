@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 require("dotenv").config();
 const path = require("path");
 const app = express();
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3001;
 const mongoURI = process.env.MONGODB_URI_Dev || process.env.MONGODB_URI
 
 // Configure body parsing for AJAX requests
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, './client/public/index.html'));
+    res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 // app.get('*', function (req, res) {

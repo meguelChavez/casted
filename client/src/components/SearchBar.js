@@ -41,7 +41,7 @@ class SearchBar extends Component {
                         onChange={this.props.handleInputChange}
                         placeholder="Search Movie By Title"
                     />
-                    <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
+                    {/* <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
                         <DropdownToggle className="btn-success" caret>
                             {this.props.searchBy ? this.props.searchBy : "Search By"}
                         </DropdownToggle>
@@ -73,11 +73,12 @@ class SearchBar extends Component {
                                 </DropdownItem>
                             ))}
                         </DropdownMenu>
-                    </InputGroupButtonDropdown>
+                    </InputGroupButtonDropdown> */}
                     {this.props.loading ? <LoadingBtn /> :
                         <Button
+                            color='primary'
                             ref="btn"
-                            className="ml-3 btn-success"
+                            className="ml-3"
                             onClick={this.props.handleSearch}
                         >
                             Search

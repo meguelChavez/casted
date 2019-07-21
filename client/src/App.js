@@ -7,12 +7,15 @@ import { toast } from "react-toastify"
 import axios from 'axios'
 import NavBar from './components/NavBar';
 import MovieCard from './components/MovieCard';
+import DetailModal from './components/DetailModal';
 
 class App extends Component {
 
   state = {
     searchOptions: ['TitleName', 'Actors'],
+    detailModal: false,
     results: [],
+    selectedTitle: {},
     searchInput: '',
     searchBy: '',
     isLoading: false
@@ -23,8 +26,8 @@ class App extends Component {
   // }
 
   searchMovies = async () => {
-    const { searchBy, searchInput } = this.state
-
+    const { searchInput } = this.state
+    const searchBy = 'TitleName'
     const payload = {
       params: {
         searchBy,
@@ -57,10 +60,17 @@ class App extends Component {
     });
   };
 
+  selectTitle = (selectedMovie) => {
+    this.setState({ selectedTitle: selectedMovie }, this.toggleModal)
+  }
+  toggleModal = () => {
+    const { detailModal } = this.state
+    this.setState({ detailModal: !detailModal });
+  }
 
 
   render() {
-    const { searchOptions, isLoading, searchBy, results } = this.state
+    const { searchOptions, isLoading, searchBy, results, detailModal, selectedTitle } = this.state
     return (
       <Container>
         <NavBar />
@@ -85,10 +95,11 @@ class App extends Component {
         <Row>
           {(results.length > 0) ?
             results.map((element, i) => (
-              <MovieCard key={i} results={element} />))
+              <MovieCard key={i} results={element} toggleModal={() => { this.selectTitle(element) }} />))
             : (this.state.searched && !isLoading) ? <MovieCard /> : ""}
         </Row>
-      </Container>
+        <DetailModal modal={detailModal} selectedTitle={selectedTitle} size="xl" toggle={this.toggleModal} />
+      </Container >
     );
   }
 }
