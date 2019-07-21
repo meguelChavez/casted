@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import axios from 'axios'
-import NavBar from './components/navBar';
+import NavBar from './components/NavBar';
 
 class App extends Component {
 
@@ -16,10 +16,10 @@ class App extends Component {
   }
 
   // componentDidMount() {
-  //   this.getTitles()
+  //   this.searchMovies()
   // }
 
-  getTitles = () => {
+  searchMovies = () => {
     const { searchBy, searchInput } = this.state
     const payload = {
       params: {
@@ -29,6 +29,7 @@ class App extends Component {
     }
     axios.get(`/api/titles`, payload).then((res) => {
       console.log(res)
+      this.setState({ results: res.data })
     })
   }
 
@@ -53,12 +54,10 @@ class App extends Component {
           <Col sm="12" md={{ size: 8, offset: 2 }}>
             <SearchBar
               loading={isLoading}
-              // chosenSC={chosenSC}
-              // keyword={keyword}
               searchOptions={searchOptions}
               searchBy={searchBy}
               handleInputChange={this.handleInputChange}
-              handleSearch={this.getTitles}
+              handleSearch={this.searchMovies}
             />
 
           </Col>

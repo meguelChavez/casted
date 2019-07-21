@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoadingBtn from './loadingBtn';
+import LoadingBtn from './LoadingBtn';
 import {
     InputGroup,
     InputGroupButtonDropdown,
