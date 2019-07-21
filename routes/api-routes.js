@@ -1,11 +1,7 @@
 // const db = require('../models');
-const mongoose = require('mongoose')
 const mongojs = require("mongojs");
-const path = require("path");
 const OMDB = require('../Utils/OmdbAPI')
 
-
-const Schema = mongoose.Schema;
 
 module.exports = (app) => {
 
