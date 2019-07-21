@@ -12,12 +12,12 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-// app.get('/', function (req, res) {
-//     res.sendFile(path.join(__dirname, '../public/index.html'));
-// });
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, '../client/public/index.html'));
+});
 
 // app.get('*', function (req, res) {
-//     res.sendFile(path.join(__dirname, '../public/index.html'));
+//     res.sendFile(path.join(__dirname, '../client/public/index.html'));
 // });
 
 if (process.env.NODE_ENV === "production") {
@@ -26,17 +26,17 @@ if (process.env.NODE_ENV === "production") {
 
 
 
-const Schema = mongoose.Schema;
+// const Schema = mongoose.Schema;
 
 mongoose.connect(mongoURI, { useNewUrlParser: true })
     .then(() => {
         console.log('connected to mongo')
-        const doc = mongoose.model('Titles', new Schema({}));
-        console.log(doc)
-        doc.find({ "TitleName": "Cavalcade" }, function (err, collection) {
-            console.log('find')
-            console.log(collection)
-        });
+        // const doc = mongoose.model('Titles', new Schema({}));
+        // console.log(doc)
+        // doc.find({ "TitleName": "Cavalcade" }, function (err, collection) {
+        //     console.log('find')
+        //     console.log(collection)
+        // });
 
     })
     .catch(err => console.log(err));

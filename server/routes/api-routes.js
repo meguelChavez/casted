@@ -28,15 +28,21 @@ module.exports = (app) => {
         console.log(searchBy)
         console.log(searchInput)
         db.Titles.find({ [searchBy]: searchInput }, (err, data) => {
+            const response = { data }
             if (err) {
                 console.log(err)
-                res.json({ err: err })
+                response.err = err
+                res.json(response)
             }
             console.log("data")
             if (data.length > 0) {
-                res.json(data)
+                response.message = 'found results'
+                response.searchSuccess = true
+                res.json(response)
             } else {
-                res.json({ msg: 'No Results Found' })
+                response.message = 'no results found'
+                response.searchSuccess = false
+                res.json(response)
             }
         })
 
