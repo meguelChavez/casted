@@ -10,7 +10,7 @@ module.exports = (app) => {
     // });
 
     const databaseUrl = process.env.MONGODB_URI;
-    const collections = [process.env.Collection];
+    const collections = ["Titles"];
 
     // Use mongojs to hook the database to the db variable
     const db = mongojs(databaseUrl, collections);
