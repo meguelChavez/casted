@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd server && npm run start",
+    "start": "cd server && npm run dev",
     "install": "cd server && npm run install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/mc4tech/casted/issues"
   },
-  "homepage": "https://github.com/mc4tech/casted#readme"
+  "homepage": "https://github.com/mc4tech/casted#readme",
+  "dependencies": {
+    "reactstrap": "^8.0.1"
+  }
 }
