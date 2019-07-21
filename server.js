@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 require("dotenv").config();
 
-const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const mongoURI = process.env.MONGODB_URI_Dev || process.env.MONGODB_URI
@@ -17,16 +16,8 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
-});
+require('./routes/api-routes')(app);
 
-// app.get('*', function (req, res) {
-//     res.sendFile(path.join(__dirname, '../client/public/index.html'));
-// });
-
-
-// const Schema = mongoose.Schema;
 
 mongoose.connect(mongoURI, { useNewUrlParser: true })
     .then(() => {
@@ -40,9 +31,6 @@ mongoose.connect(mongoURI, { useNewUrlParser: true })
 
     })
     .catch(err => console.log(err));
-
-
-require('./routes/api-routes')(app);
 
 
 app.listen(PORT, () => {
