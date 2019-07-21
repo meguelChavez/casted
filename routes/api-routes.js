@@ -9,7 +9,7 @@ module.exports = (app) => {
     //     res.sendFile(path.join(__dirname, '../public/index.html'));
     // });
 
-    const databaseUrl = process.env.MONGODB_URI_Dev;
+    const databaseUrl = process.env.MONGODB_URI;
     const collections = [process.env.Collection];
 
     // Use mongojs to hook the database to the db variable
