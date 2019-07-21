@@ -18,7 +18,5 @@
     "url": "https://github.com/mc4tech/casted/issues"
   },
   "homepage": "https://github.com/mc4tech/casted#readme",
-  "dependencies": {
-    "reactstrap": "^8.0.1"
-  }
+  "dependencies": {}
 }

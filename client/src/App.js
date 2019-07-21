@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import axios from 'axios'
+import NavBar from './components/navBar';
 
 class App extends Component {
 
@@ -42,6 +43,7 @@ class App extends Component {
     const { searchOptions, isLoading, searchBy } = this.state
     return (
       <Container>
+        <NavBar />
         <Row>
           <Col sm="12" md={{ size: 8, offset: 2 }}>
             <h1 id="searchLabel" className="align-middle">Search A Movie By Title</h1>
