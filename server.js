@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require("dotenv").config();
+
 const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -12,6 +13,10 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+}
+
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 });
@@ -19,11 +24,6 @@ app.get('/', function (req, res) {
 // app.get('*', function (req, res) {
 //     res.sendFile(path.join(__dirname, '../client/public/index.html'));
 // });
-
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-}
-
 
 
 // const Schema = mongoose.Schema;
