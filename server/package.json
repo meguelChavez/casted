@@ -4,13 +4,21 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": " concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "dev": "concurrently \"nodemon --ignore 'client/*'\" \"nodemon server.js\" \"npm run client\"",
+    "client": "cd ../client && npm run start",
+    "install": "cd ../client && yarn install",
+    "build": "cd ../client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^4.1.1",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "if-env": "^1.0.4",
     "mongoose": "^5.6.5"
   }
 }

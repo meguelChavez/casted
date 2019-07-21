@@ -23,7 +23,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true })
     .catch(err => console.log(err));
 
 
-require('./routes/api-routes')(app);
+// require('./routes/api-routes')(app);
 
 app.listen(PORT, () => {
     console.log(` server listening on port ${PORT}`);
