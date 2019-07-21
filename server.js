@@ -4,7 +4,7 @@ require("dotenv").config();
 const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3003;
-const mongoURI = process.env.MONGODB_URI || process.env.MONGODB_URI_Dev
+const mongoURI = process.env.MONGODB_URI_Dev || process.env.MONGODB_URI
 
 // Configure body parsing for AJAX requests
 app.use(express.urlencoded({ extended: true }));
