@@ -23,7 +23,7 @@ app.get('/', (request, response) => {
     response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-// mongoose.connect(process.env.MONGODB_URI || mongoURI);
+mongoose.connect(process.env.MONGOLAB_GRAY_URI || mongoURI);
 
 
 

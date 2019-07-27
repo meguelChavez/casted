@@ -1,13 +1,11 @@
 // const db = require('../models');
 const mongojs = require("mongojs");
 const OMDB = require('../Utils/OmdbAPI')
+const movieDB = require("../models")
 
 
 module.exports = (app) => {
 
-    // app.get('/', function (req, res) {
-    //     res.sendFile(path.join(__dirname, '../public/index.html'));
-    // });
 
     const databaseUrl = process.env.MONGODB_URI;
     const collections = ["Titles"];
@@ -20,30 +18,48 @@ module.exports = (app) => {
         console.log("Database Error:", error);
     });
 
+    db.Titles.find({}, (err, data) => {
+        console.log(data)
+        if (err) {
+            console.log(err)
+        }
+
+        movieDB.Movies.create(data)
+            .then((data) => {
+                console.log(data)
+            }).catch(function (err) {
+                console.log(err);
+            })
+    })
 
     app.get('/api/titles', (req, res) => {
-        // console.log('titles route')
         const { searchBy, searchInput } = req.query
-        // console.log(searchBy)
-        // console.log(searchInput)
-
-        db.Titles.find({ [searchBy]: searchInput }, (err, data) => {
-            const response = { data }
-            if (err) {
-                console.log(err)
-                response.err = err
-                res.json(response)
-            }
-            console.log("data")
-            if (data.length > 0) {
-                response.message = 'found results'
-                response.searchSuccess = true
-                res.json(response)
-            } else {
-                response.message = 'no results found'
-                response.searchSuccess = false
-                res.json(response)
-            }
+        const searchKey = searchBy || 'TitleName'
+        const response = {}
+        OMDB(searchInput, (data) => {
+            response.omdbData = data
+            db.Titles.find({ [searchKey]: searchInput }, (err, titleData) => {
+                response.data = titleData
+                console.log(response)
+                if (err) {
+                    console.log(err)
+                    response.err = err
+                    res.json(response)
+                }
+                console.log("data")
+                if (titleData.length > 0) {
+                    response.message = 'found results'
+                    response.searchSuccess = true
+                    movieDB.Movies.create(data).then((movieData) => {
+                        console.log(movieData)
+                    })
+                    res.json(response)
+                } else {
+                    response.message = 'no results found'
+                    response.searchSuccess = false
+                    res.json(response)
+                }
+            })
         })
 
     })

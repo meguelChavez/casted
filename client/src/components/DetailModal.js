@@ -13,7 +13,8 @@ const subContentGrid = {
     display: 'grid'
 }
 const DetailModal = (props) => {
-    const sortedCast = props.selectedTitle.Participants ? props.selectedTitle.Participants.sort((a, b) => (a.RoleType - b.RoleType)) : ''
+    const sortedCast = props.selectedTitle.Participants ? props.selectedTitle.Participants.sort((a, b) => a.RoleType.localeCompare(b.RoleType)) : ''
+    console.log(sortedCast)
     return (
         <div>
             <Modal size={props.size} isOpen={props.modal} toggle={props.toggle} className={props.className}>

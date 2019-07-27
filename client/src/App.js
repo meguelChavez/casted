@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from './components/SearchBar'
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Jumbotron } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { toast } from "react-toastify"
@@ -39,11 +39,12 @@ class App extends Component {
     const results = res.data
     console.log(res)
     if (results.searchSuccess) {
-      this.setState({ results: res.data.data })
+      this.setState({ results: res.data.data, omdb: results.omdbData })
     } else {
       console.log(results.message)
-      this.setState({ message: results.message })
-      return toast.error(results.message)
+      this.setState({ message: results.message, results: [], omdb: results.omdbData })
+      // , () => { setTimeout(() => this.setState({ message: null }), 2000) })
+      // return toast.error(results.message)
     }
 
 
@@ -70,7 +71,7 @@ class App extends Component {
 
 
   render() {
-    const { searchOptions, isLoading, searchBy, results, detailModal, selectedTitle } = this.state
+    const { searchOptions, isLoading, searchBy, results, omdb, detailModal, selectedTitle } = this.state
     return (
       <Container>
         <NavBar />
@@ -93,10 +94,15 @@ class App extends Component {
           </Col>
         </Row>
         <Row>
-          {(results.length > 0) ?
-            results.map((element, i) => (
-              <MovieCard key={i} results={element} toggleModal={() => { this.selectTitle(element) }} />))
-            : (this.state.searched && !isLoading) ? <MovieCard /> : ""}
+          <Col className="d-flex justify-content-center">
+            {(results.length > 0) ?
+              results.map((element, i) => (
+                <MovieCard key={i} results={element} omdb={omdb} toggleModal={() => { this.selectTitle(element) }} />))
+              : (this.state.searched && !isLoading) ? <MovieCard /> : ""}
+            {/* {this.state.message ?
+              <Jumbotron>{this.state.message}</Jumbotron> : null} */}
+          </Col>
+
         </Row>
         <DetailModal modal={detailModal} selectedTitle={selectedTitle} size="xl" toggle={this.toggleModal} />
       </Container >

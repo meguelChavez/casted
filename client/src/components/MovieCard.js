@@ -1,18 +1,21 @@
 import React from 'react';
 import {
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button, Label
+    CardTitle, CardSubtitle, Button, Label, Media
 } from 'reactstrap';
 
 const MovieCard = (props) => {
     console.log(props.results)
+    const { Poster, Title, Year, Genre, Plot } = props.omdb
+    console.log('psoter', Poster)
     const { TitleName, ReleaseYear, Genres } = props.results
-    const storyLine = props.results.Storylines[0].Description
+    const storyLine = props.results.Storylines
     return (
-        <div>
-            <Card>
-                {props.image ?
-                    <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+        // className='pt-5 col-md-6'
+        <div className='pt-5' >
+            {/* <Card>
+                {Poster ?
+                    <CardImg src={Poster} alt="Card image cap" />
                     : null}
                 <CardBody>
                     <CardTitle>{TitleName}</CardTitle>
@@ -24,7 +27,24 @@ const MovieCard = (props) => {
                     </ul>
                     <Button onClick={props.toggleModal}>See More</Button>
                 </CardBody>
-            </Card>
+            </Card> */}
+            <Media>
+                <Media right href="#">
+                    <Media object data-src={Poster} src={Poster} alt="Generic placeholder image" />
+                </Media>
+                <Media body className='pl-3'>
+                    <Media heading>
+                        {TitleName || Title} Released in {ReleaseYear || Year}
+                    </Media>
+                    {storyLine ? storyLine.map((el, i) => (
+                        <p key={i}>{el.Description}</p>
+                    )) : Plot}
+                    <div className="d-flex justify-content-end">
+                        <Button onClick={props.toggleModal}>See More</Button>
+                    </div>
+
+                </Media>
+            </Media>
         </div>
     );
 };
