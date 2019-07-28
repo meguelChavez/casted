@@ -8,6 +8,7 @@ import DetailModal from '../components/DetailModal';
 class Home extends Component {
 
     state = {
+        selected: 'cast',
         searchOptions: ['TitleName', 'Actors'],
         detailModal: false,
         results: [],
@@ -59,10 +60,15 @@ class Home extends Component {
         this.setState({ detailModal: !detailModal });
     }
 
-
+    selectCategory = (event) => {
+        event.preventDefault();
+        const { name } = event.target
+        console.log(name)
+        this.setState({ selected: name })
+    }
 
     render() {
-        const { searchOptions, isLoading, searchBy, results, omdb, detailModal, selectedTitle } = this.state
+        const { searchOptions, selected, isLoading, searchBy, results, omdb, detailModal, selectedTitle } = this.state
         return (
             <Container>
                 <Row>
@@ -94,7 +100,7 @@ class Home extends Component {
                     </Col>
 
                 </Row>
-                <DetailModal modal={detailModal} selectedTitle={selectedTitle} size="xl" toggle={this.toggleModal} />
+                <DetailModal selected={selected} modal={detailModal} selectedTitle={selectedTitle} size="xl" toggle={this.toggleModal} selectCategory={this.selectCategory} />
             </Container >
         );
     }
