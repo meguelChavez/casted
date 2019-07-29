@@ -53,13 +53,28 @@ module.exports = (app) => {
                 if (titleData.length > 0) {
                     response.message = 'found results'
                     response.searchSuccess = true
-                    movieDB.Movies.create(data).then((movieData) => {
-                        console.log(movieData)
+                    movieDB.Movies.find({ TitleName: searchInput }).then((movieObj) => {
+                        if (movieObj.length === 0) {
+                            movieDB.Movies.create(data).then((movieData) => {
+                                console.log(movieData)
+                            })
+                        }
+                    })
+
+                    res.json(response)
+                } else if (data) {
+                    movieDB.Movies.find({ Title: searchInput }).then((movieObj) => {
+                        if (movieObj.length === 0) {
+                            movieDB.Movies.create(data).then((movieData) => {
+                                console.log(movieData)
+                            })
+                        }
                     })
                     res.json(response)
                 } else {
                     response.message = 'no results found'
                     response.searchSuccess = false
+                    response.status = 404
                     res.json(response)
                 }
             })
