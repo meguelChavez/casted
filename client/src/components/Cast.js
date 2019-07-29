@@ -26,7 +26,7 @@ const Cast = (props) => {
             {roleTypes ? roleTypes.map((role, i) => {
                 return (
                     <div key={`${role.RoleType}${i}`}>
-                        <Label>{role.toUpperCase()}:</Label>
+                        <Label>{role.toUpperCase()}s:</Label>
                         <ul style={{ listStyle: 'none', padding: '0' }}>
                             {sortedCast ? sortedCast.map((el, i) => {
                                 return (

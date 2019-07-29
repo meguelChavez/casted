@@ -22,7 +22,8 @@ class Home extends Component {
     //   this.searchMovies()
     // }
 
-    searchMovies = async () => {
+    searchMovies = async (e) => {
+        e.preventDefault()
         this.setState({ isLoading: true })
         const { searchInput } = this.state
         const searchBy = 'TitleName'
