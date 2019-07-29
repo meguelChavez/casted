@@ -23,17 +23,17 @@ app.get('/', (request, response) => {
     response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-mongoose.connect(process.env.MOVIE_MONGODB_URI || "mongodb://localhost/Movie-Night");
+// mongoose.connect(MONGODB_URI);
 
-mongoose.connection.on('error', function (err) {
-    console.log('Mongoose default connection error: ' + err);
-});
+// mongoose.connection.on('error', function (err) {
+//     console.log('Mongoose default connection error: ' + err);
+// });
 
-mongoose.connection.on('connected', function () {
-    console.log('Mongoose default connection open to ' + MONGODB_URI);
+// mongoose.connection.on('connected', function () {
+//     console.log('Mongoose default connection open to ' + MONGODB_URI);
 
 
-});
+// });
 
 app.listen(PORT, () => {
     console.log(` server listening on port ${PORT}`);
