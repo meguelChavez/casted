@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from '../components/SearchBar'
-import { Container, Row, Col, Jumbotron } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios'
 import MovieCard from '../components/MovieCard';
 import DetailModal from '../components/DetailModal';
@@ -23,6 +23,7 @@ class Home extends Component {
     // }
 
     searchMovies = async () => {
+        this.setState({ isLoading: true })
         const { searchInput } = this.state
         const searchBy = 'TitleName'
         const payload = {
@@ -36,10 +37,10 @@ class Home extends Component {
         const results = res.data
         console.log(res)
         if (results.searchSuccess) {
-            this.setState({ results: res.data.data, omdb: results.omdbData })
+            this.setState({ results: res.data.data, omdb: results.omdbData, isLoading: false })
         } else {
             console.log(results.message)
-            this.setState({ message: results.message, results: [], omdb: results.omdbData })
+            this.setState({ message: results.message, results: [], omdb: results.omdbData, isLoading: false })
             // , () => { setTimeout(() => this.setState({ message: null }), 2000) })
         }
     }
@@ -61,9 +62,8 @@ class Home extends Component {
     }
 
     selectCategory = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         const { name } = event.target
-        console.log(name)
         this.setState({ selected: name })
     }
 
@@ -94,13 +94,13 @@ class Home extends Component {
                         {(results.length > 0) ?
                             results.map((element, i) => (
                                 <MovieCard key={i} results={element} omdb={omdb} toggleModal={() => { this.selectTitle(element) }} />))
-                            : (this.state.searched && !isLoading) ? <MovieCard /> : ""}
+                            : omdb ? <MovieCard omdb={omdb} toggleModal={() => { this.selectTitle(omdb) }} /> : null}
                         {/* {this.state.message ?
               <Jumbotron>{this.state.message}</Jumbotron> : null} */}
                     </Col>
 
                 </Row>
-                <DetailModal selected={selected} modal={detailModal} selectedTitle={selectedTitle} size="xl" toggle={this.toggleModal} selectCategory={this.selectCategory} />
+                <DetailModal selected={selected} results={results} modal={detailModal} selectedTitle={selectedTitle} size="xl" toggle={this.toggleModal} selectCategory={this.selectCategory} />
             </Container >
         );
     }

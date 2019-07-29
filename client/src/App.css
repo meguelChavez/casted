@@ -11,3 +11,12 @@
   background: #fff !important;
   border: 2px solid #007bff !important;
 }
+
+label{
+  color: lightslategray
+}
+
+p, li {
+  font-weight: 600;
+  font-size: 1.1em
+}

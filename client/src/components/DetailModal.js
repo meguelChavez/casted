@@ -1,10 +1,10 @@
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col } from 'reactstrap';
 import Cast from './Cast';
 import Description from './Description';
-import Awards from './Awards';
+import AwardsView from './Awards';
 
 
 const DetailModal = (props) => {
@@ -15,15 +15,15 @@ const DetailModal = (props) => {
                 <ModalHeader toggle={props.toggle}>{props.selectedTitle.TitleName} Released {props.selectedTitle.ReleaseYear}</ModalHeader>
                 <ModalBody>
                     <Row className="d-flex justify-content-around mb-5">
-                        <Col sm="10" md="3">
+                        <Col sm="10" md="4" className='d-flex justify-content-center'>
                             <Button className={(props.selected === 'awards') ? 'btnCategory active' : 'btnCategory'} color="primary" name="awards" size="lg" data-state="" onClick={props.selectCategory} >Awards</Button>{' '}
                         </Col>
 
-                        <Col sm="10" md="3">
+                        <Col sm="10" md="4" className='d-flex justify-content-center'>
                             <Button className={(props.selected === 'cast') ? 'btnCategory active' : 'btnCategory'} color="primary" size="lg" name="cast" data-state="" onClick={props.selectCategory} >Cast</Button>{' '}
                         </Col>
 
-                        <Col sm="10" md="3">
+                        <Col sm="10" md="4" className='d-flex justify-content-center'>
                             <Button className={(props.selected === 'info') ? 'btnCategory active' : 'btnCategory'} color="primary" size="lg" name="info" data-state="" onClick={props.selectCategory} >Info</Button>{' '}
                         </Col>
 
@@ -32,7 +32,7 @@ const DetailModal = (props) => {
                         <Cast {...props} /> :
                         props.selected === 'info' ? <Description {...props} />
                             : props.selected === 'awards' ?
-                                <Awards {...props} /> : null}
+                                <AwardsView {...props} /> : null}
 
                 </ModalBody>
                 <ModalFooter>

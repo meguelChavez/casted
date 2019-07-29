@@ -5,8 +5,8 @@ import {
     NavbarToggler,
     NavbarBrand,
     Nav,
-    NavItem,
-    NavLink,
+    // NavItem,
+    // NavLink,
     Container
 } from 'reactstrap';
 

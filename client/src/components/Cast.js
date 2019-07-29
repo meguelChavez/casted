@@ -6,7 +6,7 @@ const Cast = (props) => {
     const contentGrid = {
         display: 'grid',
         gridTemplateColumns: 'repeat(4, 1fr)',
-        gridTemplateRows: 'auto',
+        gridTemplatedivs: 'auto',
         gridGap: '1em'
     }
     const sortedCast = props.selectedTitle.Participants ? props.selectedTitle.Participants.sort((a, b) => a.RoleType.localeCompare(b.RoleType)) : ''
@@ -21,18 +21,17 @@ const Cast = (props) => {
         })
     }
 
-    console.log(sortedCast)
     return (
         <div style={contentGrid}>
-            {roleTypes ? roleTypes.map(role => {
+            {roleTypes ? roleTypes.map((role, i) => {
                 return (
-                    <div>
+                    <div key={`${role.RoleType}${i}`}>
                         <Label>{role.toUpperCase()}:</Label>
                         <ul style={{ listStyle: 'none', padding: '0' }}>
                             {sortedCast ? sortedCast.map((el, i) => {
                                 return (
                                     (el.RoleType === role) ?
-                                        (<li> {el.Name}</li>)
+                                        (<li key={i}> {el.Name}</li>)
                                         : null
                                 )
 
@@ -40,6 +39,27 @@ const Cast = (props) => {
                         </ul>
                     </div>)
             }) : null}
+            {(props.results.length === 0) ? (
+                <React.Fragment>
+                    <div>
+                        <Label>Actors</Label>
+                        <p>{props.selectedTitle.Actors}</p>
+                    </div>
+                    <div>
+                        <Label>Director</Label>
+                        <p>{props.selectedTitle.Director}</p>
+                    </div>
+                    <div>
+                        <Label>Writer</Label>
+                        <p>{props.selectedTitle.Writer}</p>
+                    </div>
+                    <div>
+                        <Label>Production</Label>
+                        <p>{props.selectedTitle.Production}</p>
+                    </div>
+
+                </React.Fragment>
+            ) : null}
         </div>
     )
 }

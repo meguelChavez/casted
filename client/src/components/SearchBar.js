@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import LoadingBtn from './LoadingBtn';
 import {
     InputGroup,
-    InputGroupButtonDropdown,
+    // InputGroupButtonDropdown,
     Input,
     Button,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
+    // DropdownToggle,
+    // DropdownMenu,
+    // DropdownItem
 } from 'reactstrap';
 
 class SearchBar extends Component {
