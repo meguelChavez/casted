@@ -53,6 +53,7 @@ module.exports = (app) => {
                 if (titleData.length > 0) {
                     response.message = 'found results'
                     response.searchSuccess = true
+                    response.status = 200
                     // movieDB.Movies.find({ TitleName: searchInput }).then((movieObj) => {
                     //     if (movieObj.length === 0) {
                     //         movieDB.Movies.create(data).then((movieData) => {
@@ -62,7 +63,7 @@ module.exports = (app) => {
                     // })
 
                     res.json(response)
-                } else if (data) {
+                } else if (data.Response.toLowerCase() === 'false' || data.Response === false) {
                     // movieDB.Movies.find({ Title: searchInput }).then((movieObj) => {
                     //     if (movieObj.length === 0) {
                     //         movieDB.Movies.create(data).then((movieData) => {
@@ -70,11 +71,13 @@ module.exports = (app) => {
                     //         })
                     //     }
                     // })
-                    res.json(response)
-                } else {
                     response.message = 'no results found'
                     response.searchSuccess = false
                     response.status = 404
+                    res.json(response)
+                } else {
+                    response.searchSuccess = true
+                    response.status = 200
                     res.json(response)
                 }
             })

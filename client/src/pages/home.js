@@ -33,16 +33,20 @@ class Home extends Component {
                 searchInput
             }
         }
+        try {
+            const res = await axios.get(`/api/titles`, payload)
+            const results = res.data
+            console.log(res)
+            if (results.searchSuccess) {
+                this.setState({ results: res.data.data, omdb: results.omdbData, isLoading: false })
+            } else {
+                console.log(results.message)
+                this.setState({ message: results.message, results: [], omdb: {}, isLoading: false }
+                    , () => { setTimeout(() => this.setState({ message: null }), 3000) })
+            }
+        } catch{
+            (err) => console.log(err)
 
-        const res = await axios.get(`/api/titles`, payload)
-        const results = res.data
-        console.log(res)
-        if (results.searchSuccess) {
-            this.setState({ results: res.data.data, omdb: results.omdbData, isLoading: false })
-        } else {
-            console.log(results.message)
-            this.setState({ message: results.message, results: [], omdb: results.omdbData, isLoading: false })
-            // , () => { setTimeout(() => this.setState({ message: null }), 2000) })
         }
     }
 
