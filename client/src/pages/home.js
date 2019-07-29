@@ -45,7 +45,7 @@ class Home extends Component {
                     , () => { setTimeout(() => this.setState({ message: null }), 3000) })
             }
         } catch (err) {
-            (err) => console.log(err)
+            console.log(err)
 
         }
     }

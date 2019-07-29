@@ -12,7 +12,7 @@ module.exports = async (movie, cb) => {
         cb(movieData.data)
         return movieData.data
     } catch (err) {
-        (err) => console.log(err)
+        console.log(err)
 
     }
 }
