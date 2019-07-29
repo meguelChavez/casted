@@ -40,7 +40,7 @@ module.exports = (app) => {
         const searchKey = searchBy || 'TitleName'
         const response = {}
         OMDB(searchInput, (data) => {
-            response.omdbData = data 
+            response.omdbData = data
             db.Titles.find({ [searchKey]: searchInput }, (err, titleData) => {
                 response.data = titleData
                 console.log(response)
