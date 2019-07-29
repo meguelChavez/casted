@@ -15,7 +15,7 @@ const Description = (props) => {
                 <Label>Story Line</Label>
                 <div> {props.selectedTitle.Storylines ? props.selectedTitle.Storylines.map((el, i) => (
                     <p key={i}>{el.Description}</p>
-                )) : (<p>props.selectedTitle.Plot</p>)}
+                )) : (<p>{props.selectedTitle.Plot}</p>)}
                 </div>
             </Row>
             <Row>
