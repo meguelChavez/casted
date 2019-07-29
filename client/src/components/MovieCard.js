@@ -30,7 +30,7 @@ const MovieCard = (props) => {
                     <Button onClick={props.toggleModal}>See More</Button>
                 </CardBody>
             </Card> */}
-            <Media>
+            <Media style={{ padding: '.5em', background: 'rgb(255, 255, 255,.8)' }}>
                 <Media right href="#">
                     <Media object data-src={Poster} src={Poster} alt="Generic placeholder image" />
                 </Media>
