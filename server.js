@@ -23,7 +23,7 @@ app.get('/', (request, response) => {
     response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-mongoose.connect(MONGODB_URI);
+mongoose.connect(process.env.MOVIE_MONGODB_URI || "mongodb://localhost/Movie-Night");
 
 mongoose.connection.on('error', function (err) {
     console.log('Mongoose default connection error: ' + err);
