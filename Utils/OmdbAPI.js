@@ -11,7 +11,7 @@ module.exports = async (movie, cb) => {
         const movieData = await axios.get(URL)
         cb(movieData.data)
         return movieData.data
-    } catch{
+    } catch (err) {
         (err) => console.log(err)
 
     }

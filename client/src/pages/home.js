@@ -44,7 +44,7 @@ class Home extends Component {
                 this.setState({ message: results.message, results: [], omdb: {}, isLoading: false }
                     , () => { setTimeout(() => this.setState({ message: null }), 3000) })
             }
-        } catch{
+        } catch (err) {
             (err) => console.log(err)
 
         }
