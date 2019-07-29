@@ -4,7 +4,7 @@ require("dotenv").config();
 const path = require('path')
 const app = express();
 const PORT = process.env.PORT || 3001;
-const mongoURI = process.env.MONGODB_URI_Dev || process.env.MONGODB_URI
+const MONGODB_URI = process.env.MOVIE_MONGODB_URI || "mongodb://localhost/Movie-Night"
 
 
 // Configure body parsing for AJAX requests
@@ -23,10 +23,20 @@ app.get('/', (request, response) => {
     response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-// mongoose.connect(process.env.MONGODB_URI || mongoURI);
+// mongoose.connect(MONGODB_URI);
+
+// mongoose.connection.on('error', function (err) {
+//     console.log('Mongoose default connection error: ' + err);
+// });
+
+// mongoose.connection.on('connected', function () {
+//     console.log('Mongoose default connection open to ' + MONGODB_URI);
 
 
+// });
 
 app.listen(PORT, () => {
     console.log(` server listening on port ${PORT}`);
 });
+
+

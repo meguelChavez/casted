@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import LoadingBtn from './LoadingBtn';
 import {
     InputGroup,
-    InputGroupButtonDropdown,
+    // InputGroupButtonDropdown,
     Input,
     Button,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
+    Form,
+    FormGroup,
+    // DropdownToggle,
+    // DropdownMenu,
+    // DropdownItem
 } from 'reactstrap';
 
 class SearchBar extends Component {
@@ -33,15 +35,17 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <div>
-                <InputGroup>
-                    <Input
-                        value={this.props.keyword}
-                        name="searchInput"
-                        onChange={this.props.handleInputChange}
-                        placeholder="Search Movie By Title"
-                    />
-                    {/* <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
+            <Form inline>
+                {/* <FormGroup> */}
+                <Input
+                    value={this.props.keyword}
+                    name="searchInput"
+                    bsSize="lg"
+                    className='col-md-10'
+                    onChange={this.props.handleInputChange}
+                    placeholder="Search Movie By Title"
+                />
+                {/* <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
                         <DropdownToggle className="btn-success" caret>
                             {this.props.searchBy ? this.props.searchBy : "Search By"}
                         </DropdownToggle>
@@ -74,18 +78,21 @@ class SearchBar extends Component {
                             ))}
                         </DropdownMenu>
                     </InputGroupButtonDropdown> */}
-                    {this.props.loading ? <LoadingBtn /> :
-                        <Button
-                            color='primary'
-                            ref="btn"
-                            className="ml-3"
-                            onClick={this.props.handleSearch}
-                        >
-                            Search
+                {/* </FormGroup> */}
+                {this.props.loading ? <LoadingBtn /> :
+                    <Button
+                        color='primary'
+                        ref="btn"
+                        className="ml-3 "
+                        type='subit'
+                        size='lg'
+                        onClick={this.props.handleSearch}
+                    >
+                        Search
                         </Button>
-                    }
-                </InputGroup>
-            </div>
+                }
+
+            </Form>
         );
     }
 }

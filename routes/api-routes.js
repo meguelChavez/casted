@@ -1,13 +1,11 @@
 // const db = require('../models');
 const mongojs = require("mongojs");
 const OMDB = require('../Utils/OmdbAPI')
+// const movieDB = require("../models")
 
 
 module.exports = (app) => {
 
-    // app.get('/', function (req, res) {
-    //     res.sendFile(path.join(__dirname, '../public/index.html'));
-    // });
 
     const databaseUrl = process.env.MONGODB_URI;
     const collections = ["Titles"];
@@ -21,29 +19,65 @@ module.exports = (app) => {
     });
 
 
-    app.get('/api/titles', (req, res) => {
-        // console.log('titles route')
-        const { searchBy, searchInput } = req.query
-        // console.log(searchBy)
-        // console.log(searchInput)
+    // Save existing collection of docs from read only db to  
+    // second db with read/write access
+    // db.Titles.find({}, (err, data) => {
+    //     console.log(data)
+    //     if (err) {
+    //         console.log(err)
+    //     }
 
-        db.Titles.find({ [searchBy]: searchInput }, (err, data) => {
-            const response = { data }
-            if (err) {
-                console.log(err)
-                response.err = err
-                res.json(response)
-            }
-            console.log("data")
-            if (data.length > 0) {
-                response.message = 'found results'
-                response.searchSuccess = true
-                res.json(response)
-            } else {
-                response.message = 'no results found'
-                response.searchSuccess = false
-                res.json(response)
-            }
+    //     movieDB.Movies.create(data)
+    //         .then((data) => {
+    //             console.log(data)
+    //         }).catch(function (err) {
+    //             console.log(err);
+    //         })
+    // })
+
+    app.get('/api/titles', (req, res) => {
+        const { searchBy, searchInput } = req.query
+        const searchKey = searchBy || 'TitleName'
+        const response = {}
+        OMDB(searchInput, (data) => {
+            response.omdbData = data
+            db.Titles.find({ [searchKey]: searchInput }, (err, titleData) => {
+                response.data = titleData
+                console.log(response)
+                if (err) {
+                    console.log(err)
+                    response.err = err
+                    res.json(response)
+                }
+                console.log("data")
+                if (titleData.length > 0) {
+                    response.message = 'found results'
+                    response.searchSuccess = true
+                    // movieDB.Movies.find({ TitleName: searchInput }).then((movieObj) => {
+                    //     if (movieObj.length === 0) {
+                    //         movieDB.Movies.create(data).then((movieData) => {
+                    //             console.log(movieData)
+                    //         })
+                    //     }
+                    // })
+
+                    res.json(response)
+                } else if (data) {
+                    // movieDB.Movies.find({ Title: searchInput }).then((movieObj) => {
+                    //     if (movieObj.length === 0) {
+                    //         movieDB.Movies.create(data).then((movieData) => {
+                    //             console.log(movieData)
+                    //         })
+                    //     }
+                    // })
+                    res.json(response)
+                } else {
+                    response.message = 'no results found'
+                    response.searchSuccess = false
+                    response.status = 404
+                    res.json(response)
+                }
+            })
         })
 
     })

@@ -5,8 +5,8 @@ import {
     NavbarToggler,
     NavbarBrand,
     Nav,
-    NavItem,
-    NavLink,
+    // NavItem,
+    // NavLink,
     Container
 } from 'reactstrap';
 
@@ -24,9 +24,9 @@ class NavBar extends Component {
     render() {
         return (
             <div>
-                <Navbar expand="sm" className="mb-5">
+                <Navbar expand="sm" className="mb-5 ">
                     <Container>
-                        <NavbarBrand href="/">Find A Movie</NavbarBrand>
+                        <NavbarBrand href="/" style={{ color: '#fff', fontSize: '1.5em', fontWeight: '600px' }}>Find A Movie</NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
