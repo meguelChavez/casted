@@ -21,19 +21,19 @@ module.exports = (app) => {
 
     // Save existing collection of docs from read only db to  
     // second db with read/write access
-    db.Titles.find({}, (err, data) => {
-        console.log(data)
-        if (err) {
-            console.log(err)
-        }
+    // db.Titles.find({}, (err, data) => {
+    //     console.log(data)
+    //     if (err) {
+    //         console.log(err)
+    //     }
 
-        movieDB.Movies.create(data)
-            .then((data) => {
-                console.log(data)
-            }).catch(function (err) {
-                console.log(err);
-            })
-    })
+    //     movieDB.Movies.create(data)
+    //         .then((data) => {
+    //             console.log(data)
+    //         }).catch(function (err) {
+    //             console.log(err);
+    //         })
+    // })
 
     app.get('/api/titles', (req, res) => {
         const { searchBy, searchInput } = req.query
