@@ -31,10 +31,12 @@ mongoose.connection.on('error', function (err) {
 
 mongoose.connection.on('connected', function () {
     console.log('Mongoose default connection open to ' + MONGODB_URI);
-    app.listen(PORT, () => {
-        console.log(` server listening on port ${PORT}`);
-    });
 
+
+});
+
+app.listen(PORT, () => {
+    console.log(` server listening on port ${PORT}`);
 });
 
 
